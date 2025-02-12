@@ -1,0 +1,23 @@
+name: Docker Build & Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ 15241524d }}" | docker login -u "${{ enzuops }}" --password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t enzuops/dockergit:latest .
+
+      - name: Push Docker Image
+        run: docker push enzuops/dockergit:latest
